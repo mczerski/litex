@@ -1029,12 +1029,12 @@ class SoC(Module):
 
         # SoC CPU Check ----------------------------------------------------------------------------
         if not isinstance(self.cpu, (cpu.CPUNone, cpu.Zynq7000)):
-            if "sram" not in self.bus.regions.keys():
-                self.logger.error("CPU needs {} Region to be {} as Bus or Linker Region.".format(
-                    colorer("sram"),
-                    colorer("defined", color="red")))
-                self.logger.error(self.bus)
-                raise
+            #if "sram" not in self.bus.regions.keys():
+            #    self.logger.error("CPU needs {} Region to be {} as Bus or Linker Region.".format(
+            #        colorer("sram"),
+            #        colorer("defined", color="red")))
+            #    self.logger.error(self.bus)
+            #    raise
             cpu_reset_address_valid = False
             for name, container in self.bus.regions.items():
                 if self.bus.check_region_is_in(
