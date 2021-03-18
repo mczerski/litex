@@ -330,7 +330,7 @@ def generate_dts(d, initrd_start=None, initrd_size=None, polling=False):
 
                 litespi,max-bpw = <8>;
                 litespi,sck-frequency = <1000000>;
-                litespi,num-cs = <1>;
+                litespi,num-cs = <{num_cs}>;
 
                 #address-cells = <1>;
                 #size-cells    = <0>;
@@ -342,7 +342,7 @@ def generate_dts(d, initrd_start=None, initrd_size=None, polling=False):
                     status = "okay";
                 }};
             }};
-""".format(spi_csr_base=d["csr_bases"]["spi"])
+""".format(spi_csr_base=d["csr_bases"]["spi"], num_cs=d["constants"].get("spi_num_cs", 1))
 
     # I2C ------------------------------------------------------------------------------------------
 
@@ -352,6 +352,8 @@ def generate_dts(d, initrd_start=None, initrd_size=None, polling=False):
                 compatible = "litex,i2c";
                 reg = <0x{i2c0_csr_base:x} 0x5>;
                 status = "okay";
+                #address-cells = <1>;
+                #size-cells = <0>;
             }};
 """.format(i2c0_csr_base=d["csr_bases"]["i2c0"])
 
